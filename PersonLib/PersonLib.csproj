@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>RhF</RootNamespace>
+    <AssemblyName>RhF.Model.$(MSBuildProjectName)</AssemblyName>
+    
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+
+    <Title>$(MSBuildProjectName)</Title>
+    <Authors>FelixRho</Authors>
+    <Company>FelixRhoCompany</Company>
+    <Copyright>(c) 2021 FelixRho</Copyright>
+
+    <PackageProjectUrl>https://github.com/FelixRho/pipeline</PackageProjectUrl>
+    <PackageTags>person, model</PackageTags>
+    <Version>1.0.0</Version>
+    <Description>Model for Person containing first and lastname</Description>
+
+    <PackageId>RhF.Model.Person</PackageId>
+   
+    <RepositoryUrl>https://github.com/FelixRho/pipeline.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+</Project>
