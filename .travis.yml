@@ -14,3 +14,10 @@ before_script:
  
 script:
   - dotnet build -c Release
+  - |
+    dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:Exclude="[xunit*]*" /p:excludebyfile="**/*.Designer.cs"
+    if [ $? -eq 0 ]; then
+      bash <(curl -s https://codecov.io/bash) -Z
+    else
+      exit 1
+    fi
