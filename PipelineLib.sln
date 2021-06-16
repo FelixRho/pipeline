@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonLib", "PersonLib\PersonLib.csproj", "{13EAF278-4EF3-4303-B43E-953AF1CFE121}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonLibTest", "PersonLibTest\PersonLibTest.csproj", "{29F4CBA9-2F52-4935-84AD-3625C0FC21B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonLibTest", "PersonLibTest\PersonLibTest.csproj", "{29F4CBA9-2F52-4935-84AD-3625C0FC21B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
