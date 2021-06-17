@@ -8,13 +8,45 @@ solution: PipelineLib.sln
 mono: none
 dotnet: 5.0.301
  
+addons:
+  apt:
+    packages:
+      - zip
+      - tar
+      - gzip
+
 before_script:
   - set -e
   - dotnet restore
  
 script:
-  - set -e
-  - dotnet build -c Release
   - |
-    dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:Exclude="[xunit*]*" /p:excludebyfile="**/*.Designer.cs"
-    bash <(curl -s https://codecov.io/bash) -Z
+    if [[ -z "$TRAVIS_TAG" ]]; then
+      set -e
+      dotnet build -c Release
+      dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:Exclude="[xunit*]*" /p:excludebyfile="**/*.Designer.cs"
+      bash <(curl -s https://codecov.io/bash) -Z
+    fi
+
+before_deploy:
+  - set -e
+  - dotnet publish PipelineLib.sln -c Release -o output
+  - dotnet pack PipelineLib.sln -c Release -o nuget
+  - zip ./Pipeline.zip ./output/* ./nuget/*
+  - tar cfvz ./Pipeline.tar.gz ./output ./nuget
+
+
+deploy:
+  provider: releases
+  overwrite: true
+  api_key: $GITHUB_TOKEN
+  file:
+    - "./Pipeline.zip"
+    - "./Pipeline.tar.gz"
+  skip_cleanup: true
+  on:
+    tags: true
+
+after_deploy:
+  - dotnet nuget push --skip-duplicate ./nuget/'*.nupkg' -k $NUGET_TOKEN -s https://api.nuget.org/v3/index.json
+  - dotnet nuget push --skip-duplicate ./nuget/'*.nupkg' -k $PACKAGE_TOKEN -s https://nuget.pkg.github.com/FelixRho/index.json
